@@ -192,40 +192,7 @@ server.delete('/api/actions/:id', (req, res) => {
     })
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// completed all main goals for this API.
 
 const port = 5000;
 server.listen(port, () => {console.log('== Server is listening on port 5000 ==')});
