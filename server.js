@@ -134,11 +134,63 @@ server.get('/api/actions', (req, res) => {
 server.get('/api/actions/:id', (req, res) => {
     const id = req.params.id;
     action
-    .get()
-    .then()
-    .catch()
+    .get(id)
+    .then(response => {
+        res.status(200).json({ response })
+    })
+    .catch(err => {
+        res.status(500).json({ Error: err })
+    })
 });
 
+// actions -- post
+
+server.post('/api/actions', (req, res) => {
+    const { project_id, description, notes } = req.body;
+    const addAction = { project_id, description, notes };
+    action
+    .insert(addAction)
+    .then(response => {
+        res.status(200).json({ response })
+    })
+    .catch(err => {
+        res.status(500).json({ Error: err })
+    })
+});
+
+// actions -- put
+
+server.put('/api/actions/:id', (req, res) => {
+    const id = req.params.id;
+    const update = req.body;
+    action 
+    .update(id, update)
+    .then(response => {
+        res.status(200).json({ response })
+    })
+    .catch(err => {
+        res.status(500).json({ Error: err })
+    })
+});
+
+// actions -- delete
+
+server.delete('/api/actions/:id', (req, res) => {
+    const id = req.params.id;
+    let newDeleted;
+    action.get(id)
+    .then(myAction => {
+        newDeleted = {...myAction[0]};
+        action
+        .remove(id)
+        .then(actions => {
+            res.status(200).json(newDeleted);
+        })
+        .catch(err => {
+            res.status(500).json({ Error: err })
+        })
+    })
+});
 
 
 
