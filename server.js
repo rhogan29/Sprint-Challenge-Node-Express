@@ -56,10 +56,16 @@ server.get('/api/projects/:id/actions', (req, res) => {
     project
     .getProjectActions(id)
     .then(response => {
-        res.status(200)
+        res.status(200).json({ response })
     })
-    .catch()
+    .catch(err => {
+        res.status(500).json({ Error: err })
+    })
 });
+
+// projectmodel -- post
+
+server.post('');
 
 
 
